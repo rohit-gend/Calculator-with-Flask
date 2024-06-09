@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <div class="calculator">
+            <h1>Calculator</h1>
+            <form method="post">
+                <input type="text" class="display" id="input" name="expression" value="{{ expression }}" placeholder="0"
+                    readonly>
+
+                <p class="display" id="output">
+                    {% if result %}
+                    {{ result }}
+                    {% endif %}
+                </p>
+
+                <div class="buttons">
+                    <button type="button" class="operator" onclick="addToExpression('(')"> ( </button>
+                    <button type="button" class="operator" onclick="addToExpression(')')"> ) </button>
+                    <button type="button" class="operator" onclick="clearExpression()"> C </button>
+                    <button type="button" class="operator" onclick="delFromExpression()"> DE </button>
+
+                    <button type="button" class="" onclick="addToExpression('7')">7</button>
+                    <button type="button" class="" onclick="addToExpression('8')">8</button>
+                    <button type="button" class="" onclick="addToExpression('9')">9</button>
+                    <button type="button" class="operator" onclick="addToExpression('/')">/</button>
+
+                    <button type="button" class="" onclick="addToExpression('4')">4</button>
+                    <button type="button" class="" onclick="addToExpression('5')">5</button>
+                    <button type="button" class="" onclick="addToExpression('6')">6</button>
+                    <button type="button" class="operator" onclick="addToExpression('*')">*</button>
+
+                    <button type="button" class="" onclick="addToExpression('1')">1</button>
+                    <button type="button" class="" onclick="addToExpression('2')">2</button>
+                    <button type="button" class="" onclick="addToExpression('3')">3</button>
+                    <button type="button" class="operator" onclick="addToExpression('-')">-</button>
+
+                    <button type="button" class="" onclick="addToExpression('00')">00</button>
+                    <button type="button" class="" onclick="addToExpression('0')">0</button>
+                    <button type="button" class="" onclick="addToExpression('.')">.</button>
+                    <button type="button" class="operator" onclick="addToExpression('+')">+</button>
+
+                    <button type="submit" class="equal operator">=</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Function to add characters to the expression input field
+        function addToExpression(value) {
+            document.getElementById('input').value += value;
+        }
+    
+        // Function to clear the expression input field and result output
+        function clearExpression() {
+            document.getElementById('input').value = "";
+            document.getElementById('output').innerHTML = "";
+        }
+    
+        // Function to delete the last character from the expression input field
+        function delFromExpression() {
+            var expression = document.getElementById('input').value;
+            document.getElementById('input').value = expression.slice(0, -1);
+        }
+    </script>
+    
+</body>
+
+</html>
